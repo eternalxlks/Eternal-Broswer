@@ -8,7 +8,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!url.startsWith("http://") && !url.startsWith("https://")) {
       url = "https://" + url;
     }
+
+    // Try to load the URL in the iframe
     browserFrame.src = url;
+
+    // Handle iframe load errors
+    browserFrame.onerror = () => {
+      alert("This website cannot be loaded in the iframe. It will open in a new tab.");
+      window.open(url, "_blank");
+    };
   });
 
   urlInput.addEventListener("keydown", (event) => {
